@@ -27,7 +27,7 @@ hystrix:
     polling-interval-ms: 2000
 #服务版本（调用pom文件中版本）
 info:
-  version: @project.version@
+  version: 1.1
 
 
 # 自定义的属性值 用于swagger配置类使用
