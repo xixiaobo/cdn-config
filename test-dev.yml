@@ -1,0 +1,79 @@
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+  instance:
+    appname: ${spring.application.name}
+    instanceId: ${spring.application.name}:0.0.1
+    #该配置指示eureka客户端需要向eureka服务器发送心跳的频率  (Spring Cloud默认该配置是 30s)
+    lease-renewal-interval-in-seconds: 5
+    #该配置指示eureka服务器在接收到最后一个心跳之后等待的时间，然后才能从列表中删除此实例 (Spring Cloud默认该配置是 90s)
+    lease-expiration-duration-in-seconds: 10
+    status-page-url-path: /actuator/info #状态页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
+    health-check-url-path: /actuator/health #健康检查页面的URL，相对路径，默认使用 HTTP 访问，如果需要使用 HTTPS则需要使用绝对路径配置
+    prefer-ip-address: true
+    #instance-id: http://192.168.1.4:8110 #服务中心的信息显示（如果IP地址不显示的话，进行配置）
+
+spring:
+  datasource:
+    url: cd5l54TBP5DVPMMGI8kr1QuxDyi6nJgLvns98Glk9B0kpRp64CjwZyI8BNMCV4dioiTllqWFC3hG/yYvios5azSe5UUxeYW7Cu5coZgWgS3ofNXBDxDpQ88+dZp0ZwAru2ZGa6qFCbNG+ht8t5PWea5YufDab3F3ux5hVWuBwTU=
+    username: NejGBptcCU0G2brD7O4HJOO3F/6le2j1SyekardA3K4183rPOy4JMW9gSfBypmpRTrDTEz4Y57baxUYU9CVh+14upOFJgu6Nxwkn27K/TR4OfukxnAE0NvaGMPQPbuv+UQn4elcoPHEkbex5Zr+vbbvZgP8JnIiBMBmo2zzIr0w=
+    password: WZneTIOWMLkk3AIFgNCsmzSkM5BIsURNIBSJtrGw82Alws8m/KTDsi9u9xVQ8AqoWVPSDChaOG54ieNW1sta7wr7DwRNoOduT3PMOL388cSnMI0BWC8ntAex9ad2fXlXcpF065Lt8pJ/ypPldzOhAKUarCYomeSS89itE7kEHBs=
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+        minimum-idle: 5
+        maximum-pool-size: 15
+        auto-commit: true
+        idle-timeout: 30000
+        pool-name: DatebookHikariCP
+        max-lifetime: 1800000
+        connection-timeout: 30000
+        connection-init-sql: select 1
+
+
+
+  thymeleaf:
+    prefix: classpath:/views/
+    suffix: .html
+    cache: false
+
+#配置actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+info:
+  version: 0.0.1
+
+swagger:
+  title: "${spring.application.name} API"
+  description: "${spring.application.name} by hcycom"
+  version: "0.0.1"
+  basePackage: "com.hcycom.cdn_uaa.controller"
+
+logging:
+  config: classpath:config/logback-spring.xml
+
+
+remote:
+  maxTotalConnect: 0
+  maxConnectPerRoute: 200
+  connectTimeout: 2000
+  readTimeout: 3000
+
+
+oauth2:
+  access_token_time : 1800
+  frefersh_token_time : 3600
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+
