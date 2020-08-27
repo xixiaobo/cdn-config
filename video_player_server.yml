@@ -1,0 +1,81 @@
+
+
+
+# 服务启动端口
+server:
+  port: 8088
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+feign:
+  hystrix:
+    #是否开启服务调用断熔处理
+    enabled: true
+
+hystrix:
+  metrics:
+    # 启用Hystrix指标轮询
+    enabled: true
+    # 后续轮询度量之间的间隔
+    polling-interval-ms: 2000
+#服务版本（调用pom文件中版本）
+info:
+  version: @project.version@
+
+
+# 自定义的属性值 用于swagger配置类使用
+swagger:
+  title: "${spring.application.name} API"
+  description: "${spring.application.name} by hcycom"
+  version: "0.0.1"
+  # swagger扫描包
+  basePackage: "com.hcycom.videoplayerserver.controller"
+
+
+# springboot数据库连接配置 start
+  # 需包：mysql-connector-java
+spring:
+  datasource:
+    url: OAWbw4fcPGvJKHGUpdqzFuxL4MyyvU+65iGOyriwzEVgyzIyxfYTI7pm3VRs+QkN1Y52qOY7U+JyUB/4S9nVbhpt6UUF9IKtYdae/ohz11C7so7lk6lFPbbAFc5302N527uO8EssFf7pe9/o6MS73eGASMD5Ce3cmSy5dzg+YNk=
+    username: WTE82kSwp2uo3fPDZePUppcbXwDF1FgQN9FYWJibvc3clhAwMEmdk2nsrNNf9W7T24EHmeTJvmtbgUuFA7Td2G2SnyF0XFyjicqJ76P1X1nvbn4HfBl/YIqDOkwayelEEw3enfCQvEjtK/6MOJk77aI56eM6RPMbeIvXNXrOHko=
+    password: NpjuJIswS5dmySO96SH1HR3wJwjqeTzSRFoedkmbb1UCZEecGHbIJazGwJTiLNiGITJsNdZFOmU0Zy32voggo1KUHAvI8S/neTYd/B4dyxST0U45mySnyxCjPC5LqXbvMyvirnagMGgp3VifWOrr67w+GgF9XExaJe15oXZ1HpU=
+    # 调用mysql包（高版本路径回不一样可以根据日志提醒跟换）
+    driver-class-name: com.mysql.jdbc.Driver
+    # springboot 2.0 后自带的hikari数据库连接池
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-init-sql: select 1
+# springboot数据库连接配置 end
+#设置文件上传文件大小 start
+  servlet:
+    multipart:
+      maxFileSize: 30MB
+      maxRequestSize: 30MB
+#设置文件上传文件大小 end
+
+# mybatis配置 start
+  # 需包：mybatis-spring-boot-starter
+mybatis:
+  # 配置mybatis分页（需要导入包：pagehelper）
+  config-location: classpath:config/mybatis_config.xml
+  # mybatis sql命令XML文件扫描地址
+  mapper-locations: classpath:mapper/*.xml
+# mybatis配置 end
+
+
+
+
